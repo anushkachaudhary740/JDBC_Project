@@ -14,9 +14,10 @@ public class Main {
             System.out.println("Press 1 for add student");
             System.out.println("Press 2 for delete student");
             System.out.println("Press 3 for display student");
-            System.out.println("Press 4 for exit student");
+            System.out.println("Press 4 for update student");
+            System.out.println("Enter 5 for exit ");
             int c = Integer.parseInt(br.readLine());
-            //int userId ;
+            int userId =0;
             if (c == 1) {
                 //adding student
                 System.out.println("Enter user name :");
@@ -39,7 +40,7 @@ public class Main {
             } else if (c == 2) {
                 // delete student
                 System.out.println("Enter student id to delete: ");
-                Integer userId = Integer.parseInt(br.readLine());
+                 userId = Integer.parseInt(br.readLine());
                 boolean f = StudentDataAccessObjectClass.deleteStudent(userId);
                 if (f) {
                     System.out.println("Deleted....");
@@ -50,10 +51,36 @@ public class Main {
             } else if (c == 3) {
                 StudentDataAccessObjectClass.showAllStudent();
 
-            } else {
+            }
+            else if (c == 4) {
+                //updating student
+                System.out.println("Enter user id which you want to update :");
+                int id=Integer.parseInt(br.readLine());
+
+                System.out.println("Enter user name :");
+                String name = br.readLine();
+
+                System.out.println("Enter user phone : ");
+                String phone = br.readLine();
+
+                System.out.println("Enter user city : ");
+                String city = br.readLine();
+
+                Student st = new Student(id,name, phone, city);
+                boolean answer = StudentDataAccessObjectClass.updateStudentToDB(st);
+                if (answer) {
+                    System.out.println("Student is added successfully....");
+                } else {
+                    System.out.println("Something went wrong try again..");
+                }
+                System.out.println(st);
+            }
+
+            else {
                break;
             }
         }
+
         System.out.println("....Exit....\nThank You ! " );
     }
 

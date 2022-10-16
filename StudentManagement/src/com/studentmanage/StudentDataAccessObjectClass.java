@@ -75,4 +75,25 @@ public class StudentDataAccessObjectClass {
 
     }
 
+    public static boolean updateStudentToDB(Student st) {
+        boolean f=false;
+        try{
+            //jdbc code;
+            Connection con=ConnectionProvider.createConnection();
+            String q="UPDATE students SET sname =?, sphone = ?,scity=? WHERE sid = ?";
+            //PreparedStatement
+            PreparedStatement pstmt=con.prepareStatement(q);
+            pstmt.setString(1,st.getStudentName());
+            pstmt.setString(2,st.getStudentPhone());
+            pstmt.setString(3,st.getStudentCity());
+            pstmt.setInt(4,st.getStudentId());
+            //execute....
+            pstmt.executeUpdate();
+            f=true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return f;
+    }
 }
